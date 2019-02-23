@@ -9,12 +9,8 @@ router.get("/hello", function (req, res) {
 // TImestamp endpoint
 router.get("/timestamp/:datestring", function(req, res) {
   let datestring = req.params.datestring;
-  let date;
-  if (datestring.split('-').length === 3) {
-    date = new Date(datestring);
-  } else {
-    date = new Date(parseInt(datestring));
-  };
+  let date = new Date(datestring);
+  if (!date.getTime()) date = new Date(parseInt(datestring));
   if (!date.getTime()) {
     res.json({ error: 'Invalid Date' });
   } else {
